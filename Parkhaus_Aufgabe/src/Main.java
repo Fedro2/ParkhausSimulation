@@ -48,7 +48,7 @@ class Main {
                 anzahlPlätze(parkhaus);
 
             } else {
-                if (visitTime > 3000) {
+                if (visitTime > 60000) {
                     System.out.println("Du musst noch dein Aufenthalt bezahlen!");
                     zahlen(visitTime, fahrer, parkhaus);
                 } else {
@@ -64,7 +64,7 @@ class Main {
 
             System.out.println("Dein Aufenthalt dauerte: " + visitTime);
             tarifeAnzeigen();
-            if (visitTime > 3000 && visitTime < 120000) {
+            if (visitTime > 60000 && visitTime < 120000) {
                 System.out.println("Zum zahlen: 5 CHF");
                 System.out.println("Drücke /ENTER/ zum zahlen");
                 enter.nextLine();
