@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/ParkhausSimulation.iml" filepath="$PROJECT_DIR$/.idea/ParkhausSimulation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Parkhaus_Aufgabe/Parkhaus_Aufgabe.iml" filepath="$PROJECT_DIR$/Parkhaus_Aufgabe/Parkhaus_Aufgabe.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Parkhaus_AufgabeNEW/Parkhaus_AufgabeNEW.iml" filepath="$PROJECT_DIR$/Parkhaus_AufgabeNEW/Parkhaus_AufgabeNEW.iml" />
+    </modules>
+  </component>
+</project>
