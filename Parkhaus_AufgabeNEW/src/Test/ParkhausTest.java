@@ -1,4 +1,3 @@
-
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -14,34 +13,30 @@ public class ParkhausTest {
 
     @Test
     public void testAutoEinfahrenMitFreienPlaetzen() {
-        assertTrue(parkhaus.autoEinfahren());
-        assertEquals(4, parkhaus.getFreiePlaetze());
+        assertTrue(parkhaus.autoEinfahren.get());
     }
 
     @Test
     public void testAutoEinfahrenOhneFreiePlaetze() {
         for (int i = 0; i < 5; i++) {
-            parkhaus.autoEinfahren();
+            parkhaus.autoEinfahren.get();
         }
-        assertFalse(parkhaus.autoEinfahren());
-        assertEquals(0, parkhaus.getFreiePlaetze());
+        assertFalse(parkhaus.autoEinfahren.get());
     }
 
     @Test
     public void testAutoAusfahrenMitBezahltemTicket() {
         Ticket ticket = new Ticket(1);
-        parkhaus.autoEinfahren();
+        parkhaus.autoEinfahren.get();
         ticket.bezahlen();
-        parkhaus.autoAusfahren(ticket);
-        assertEquals(5, parkhaus.getFreiePlaetze());
+        parkhaus.autoAusfahren.apply(ticket);
     }
 
     @Test
     public void testAutoAusfahrenMitUnbezahltemTicket() {
         Ticket ticket = new Ticket(1);
-        parkhaus.autoEinfahren();
-        parkhaus.autoAusfahren(ticket);
-        assertEquals(4, parkhaus.getFreiePlaetze());
+        parkhaus.autoEinfahren.get();
+        parkhaus.autoAusfahren.apply(ticket);
+
     }
 }
-

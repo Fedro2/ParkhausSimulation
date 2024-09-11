@@ -1,3 +1,6 @@
+import java.util.function.Function;
+import java.util.function.Supplier;
+
 public class Parkhaus {
     private int gesamtPlaetze;
     private int freiePlaetze;
@@ -9,7 +12,7 @@ public class Parkhaus {
         this.schranke = new Schranke();
     }
 
-    public boolean autoEinfahren() {
+    public Supplier<Boolean> autoEinfahren = () -> {
         if (freiePlaetze > 0) {
             freiePlaetze--;
             schranke.oeffnen();
@@ -19,9 +22,9 @@ public class Parkhaus {
             System.out.println("Keine freien Plätze verfügbar.");
             return false;
         }
-    }
+    };
 
-    public void autoAusfahren(Ticket ticket) {
+    public Function<Ticket, Void> autoAusfahren = (ticket) -> {
         if (ticket.isBezahlt()) {
             freiePlaetze++;
             schranke.oeffnen();
@@ -30,9 +33,6 @@ public class Parkhaus {
         } else {
             System.out.println("Ticket wurde nicht bezahlt. Ausfahrt nicht möglich.");
         }
-    }
-
-    public int getFreiePlaetze() {
-        return freiePlaetze;
-    }
+        return null;
+    };
 }

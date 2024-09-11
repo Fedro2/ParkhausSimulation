@@ -7,7 +7,7 @@ public class ZahlungsstationTest {
     public void testBezahlen() {
         Ticket ticket = new Ticket(1);
         Zahlungsstation zahlungsstation = new Zahlungsstation();
-        zahlungsstation.bezahlen(ticket);
+        zahlungsstation.bezahlen.accept(ticket);
         assertTrue(ticket.isBezahlt());
     }
 }

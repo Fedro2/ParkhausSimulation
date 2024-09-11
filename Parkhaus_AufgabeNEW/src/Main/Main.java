@@ -1,3 +1,5 @@
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Main {
@@ -5,8 +7,33 @@ public class Main {
         Parkhaus parkhaus = new Parkhaus(5);
         Zahlungsstation zahlungsstation = new Zahlungsstation();
         Scanner scanner = new Scanner(System.in);
-        int ticketCounter = 1;
-        Ticket currentTicket = null;
+        final int[] ticketCounter = {1};
+        final Ticket[] currentTicket = new Ticket[1];
+
+        Map<Integer, Runnable> actions = new HashMap<>();
+        actions.put(1, () -> {
+            if (parkhaus.autoEinfahren.get()) {
+                currentTicket[0] = new Ticket(ticketCounter[0]++);
+            }
+        });
+        actions.put(2, () -> {
+            if (currentTicket[0] != null) {
+                zahlungsstation.bezahlen.accept(currentTicket[0]);
+            } else {
+                System.out.println("Kein Ticket zum Bezahlen vorhanden.");
+            }
+        });
+        actions.put(3, () -> {
+            if (currentTicket[0] != null) {
+                parkhaus.autoAusfahren.apply(currentTicket[0]);
+            } else {
+                System.out.println("Kein Ticket vorhanden.");
+            }
+        });
+        actions.put(4, () -> {
+            System.out.println("Programm beendet.");
+            scanner.close();
+        });
 
         while (true) {
             System.out.println("\nOptionen:");
@@ -17,33 +44,7 @@ public class Main {
             System.out.print("Wählen Sie eine Option: ");
             int option = scanner.nextInt();
 
-            switch (option) {
-                case 1:
-                    if (parkhaus.autoEinfahren()) {
-                        currentTicket = new Ticket(ticketCounter++);
-                    }
-                    break;
-                case 2:
-                    if (currentTicket != null) {
-                        zahlungsstation.bezahlen(currentTicket);
-                    } else {
-                        System.out.println("Kein Ticket zum Bezahlen vorhanden.");
-                    }
-                    break;
-                case 3:
-                    if (currentTicket != null) {
-                        parkhaus.autoAusfahren(currentTicket);
-                    } else {
-                        System.out.println("Kein Ticket vorhanden.");
-                    }
-                    break;
-                case 4:
-                    System.out.println("Programm beendet.");
-                    scanner.close();
-                    return;
-                default:
-                    System.out.println("Ungültige Option.");
-            }
+            actions.getOrDefault(option, () -> System.out.println("Ungültige Option.")).run();
         }
     }
 }
