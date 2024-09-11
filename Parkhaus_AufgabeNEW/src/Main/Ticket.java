@@ -15,6 +15,10 @@ public class Ticket {
         return bezahlt;
     }
 
+    public void ausfahren() {
+        bezahlt = false;
+    }
+
     public void bezahlen() {
         bezahlt = true;
     }

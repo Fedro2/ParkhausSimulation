@@ -26,6 +26,7 @@ public class Parkhaus {
             freiePlaetze++;
             schranke.oeffnen();
             System.out.println("Das Auto fährt aus. Es gibt jetzt " + freiePlaetze + " freie Plätze.");
+            ticket.ausfahren();
         } else {
             System.out.println("Ticket wurde nicht bezahlt. Ausfahrt nicht möglich.");
         }
